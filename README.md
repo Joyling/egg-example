@@ -124,4 +124,48 @@ module.exports = NewsService;
 ```javascript
 config.api = 'http://www.phonegap100.com'
 ```
-2. 
+2. 具体查看spider代码
+
+# 框架扩展extend
+1. 框架提供了多种扩展点扩展自身的功能(在开发中，我们既可以使用已有的api来方便开发，也可以对以上对象进行自定义扩展，进一步加强框架的功能)
+- Application
+- Context
+- Request
+- Response
+- Helper
+2. 创建appliction文件夹，创建appliction.js,就可以扩展application啦
+```javascript
+// extend/helper.js
+ // 可以在扩展里面引用第三方模块
+// npm install silly-datetime --save
+// 引入模块
+var sd = require('silly-datetime');
+module.exports = {
+    // this是helper对象，在其中可以调用其它helper方法
+    // this.ctx => context对象
+    // this.app => application对象
+    formateTime(param) {
+        // 格式化日期
+        return sd.format(new Date(param * 1000), 'YYYY-MM-DD HH:mm');
+    }
+}
+
+// 使用
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    抓取的新闻列表
+    <ul><%for(var i=0;i< list.length;i++){%>
+        <li><a href="spidercontent?aid=<%=list[i].aid%>"><%=list[i].title%></a></li>
+        <span>日期<%=helper.formateTime(list[i].dateline)%></span>
+    <%}%>
+    </ul>
+</body>
+</html>
+```

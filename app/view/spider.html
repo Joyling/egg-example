@@ -10,6 +10,7 @@
     抓取的新闻列表
     <ul><%for(var i=0;i< list.length;i++){%>
         <li><a href="spidercontent?aid=<%=list[i].aid%>"><%=list[i].title%></a></li>
+        <span>日期<%=helper.formateTime(list[i].dateline)%></span>
     <%}%>
     </ul>
 </body>
