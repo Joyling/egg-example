@@ -16,7 +16,11 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1589201852514_9215';
 
   // add your middleware config here
-  config.middleware = [];
+  
+  config.middleware = [ 'printdate', 'auth'];
+  config.printdate = {
+    aaa : 'aaa'
+  }
 
   config.view = {
     mapping: {
